@@ -1,0 +1,41 @@
+# Файлы и директории сборки CMake
+build/
+*.cmake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cbp # Code::Blocks project file
+*.depend
+*.layout
+*.o
+*.obj
+*.a
+*.lib
+*.dll
+*.exe
+*.so
+*.dylib
+
+# Файлы Visual Studio Code
+.vscode/
+
+# Локальные файлы Visual Studio (если кто-то откроет в VS)
+.vs/
+*.VC.db
+*.VC.VC.opendb
+*.sln
+*.suo
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+**/Debug/
+**/Release/
+**/debug/
+**/release/
+x64/
+Win32/
+
+# Файлы операционной системы
+.DS_Store
+Thumbs.db
