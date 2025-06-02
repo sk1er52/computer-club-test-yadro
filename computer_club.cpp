@@ -2,7 +2,7 @@
 #include <iostream>
 #include <limits>
 
-namespace {
+namespace utils {
 int parsePositiveInteger(const std::string &s) {
   if (s.empty()) {
     return -1;
@@ -53,7 +53,19 @@ bool isValidIntegerString(const std::string &s, int &out_val, int min_val,
     return false;
   }
 }
-} // namespace
+
+bool isValidClientName(const std::string &name) {
+  if (name.empty())
+    return false;
+  for (char c : name) {
+    if (!((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || c == '_' ||
+          c == '-')) {
+      return false;
+    }
+  }
+  return true;
+}
+} // namespace utils
 
 // --- struct Time ---
 Time::Time() : hours(0), minutes(0) {}
@@ -238,7 +250,7 @@ ComputerClub::loadConfiguration(std::istream &configFileStream) {
     return line;
   } // extra data
 
-  this->num_tables_config = parsePositiveInteger(num_tables_str);
+  this->num_tables_config = utils::parsePositiveInteger(num_tables_str);
   if (this->num_tables_config == -1)
     return line;
 
@@ -281,7 +293,7 @@ ComputerClub::loadConfiguration(std::istream &configFileStream) {
     return line;
   } // extra data
 
-  this->hourly_rate_config = parsePositiveInteger(hourly_rate_str);
+  this->hourly_rate_config = utils::parsePositiveInteger(hourly_rate_str);
   if (this->hourly_rate_config == -1)
     return line;
 
@@ -309,7 +321,7 @@ ComputerClub::parseEventDetails(const std::string &eventLine) {
     return std::nullopt;
   }
 
-  if (!isValidIntegerString(id_str, data.id, 1, 4)) {
+  if (!utils::isValidIntegerString(id_str, data.id, 1, 4)) {
     return std::nullopt;
   }
 
@@ -322,7 +334,7 @@ ComputerClub::parseEventDetails(const std::string &eventLine) {
   case 3:
   case 4:
     iss >> client_name_str_temp;
-    if (iss.fail() || !isValidClientName(client_name_str_temp))
+    if (iss.fail() || !utils::isValidClientName(client_name_str_temp))
       return std::nullopt;
     // extra data
     if (iss >> table_id_str_param_temp)
@@ -332,10 +344,11 @@ ComputerClub::parseEventDetails(const std::string &eventLine) {
     break;
   case 2: {
     iss >> client_name_str_temp >> table_id_str_param_temp;
-    if (iss.fail() || !isValidClientName(client_name_str_temp))
+    if (iss.fail() || !utils::isValidClientName(client_name_str_temp))
       return std::nullopt;
-    if (!isValidIntegerString(table_id_str_param_temp, table_id_param_val, 1,
-                              this->num_tables_config))
+    if (!utils::isValidIntegerString(table_id_str_param_temp,
+                                     table_id_param_val, 1,
+                                     this->num_tables_config))
       return std::nullopt;
 
     // extra data
@@ -575,16 +588,4 @@ std::vector<std::string> ComputerClub::getTableStatistics() const {
     stats.push_back(oss.str());
   }
   return stats;
-}
-
-bool isValidClientName(const std::string &name) {
-  if (name.empty())
-    return false;
-  for (char c : name) {
-    if (!((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || c == '_' ||
-          c == '-')) {
-      return false;
-    }
-  }
-  return true;
 }

@@ -65,7 +65,7 @@
     ```
     *   Для Windows (из командной строки типа cmd или PowerShell):
     ```bash
-    .\bin\task ..\test_file.txt
+    .\bin\task.exe ..\test_file.txt
     ```
     Или если вы используете Git Bash / MinGW shell в Windows:
     ```bash

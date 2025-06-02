@@ -11,6 +11,13 @@
 #include <string>
 #include <vector>
 
+namespace utils {
+int parsePositiveInteger(const std::string &s);
+bool isValidIntegerString(const std::string &s, int &out_val, int min_val,
+                          int max_val);
+bool isValidClientName(const std::string &name);
+} // namespace utils
+
 // --- struct for time ---
 struct Time {
   int hours;

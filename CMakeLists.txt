@@ -69,9 +69,9 @@ set(TEST_EXECUTABLE_NAME RunClubTests)
 add_executable(${TEST_EXECUTABLE_NAME}
     # Файлы с тестами из директории tests/
     tests/test_time.cpp
-    #tests/test_event.cpp
+    tests/test_event.cpp
     tests/test_table_info.cpp
-    #tests/test_parsers.cpp
+    tests/test_parsers.cpp
 )
 
 # Линкуем тесты с библиотекой логики клуба и Google Test
