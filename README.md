@@ -53,19 +53,37 @@
     ```
     Эта команда вызовет нижележащую систему сборки.
 
-    Исполняемый файл (по умолчанию `task.exe` на Windows или `task` на Linux) будет находиться в поддиректории `build/Debug` или `build/Release`, в зависимости от конфигурации CMake(по умолчанию `build/Debug`).
+    Исполняемый файл будет находиться в поддиректории `build/bin`.
 
 5.  **Запуск программы:**
     Программа принимает один аргумент командной строки – путь к текстовому файлу с входными данными.
 
     Пример запуска (предполагается, что входной файл `test_file.txt` — в родительской директории проекта):
+    *   Для Linux/macOS:
     ```bash
-    ./ComputerClubPrototype ../../test_file.txt
+    ./bin/task ../test_file.txt
     ```
-    Или для Windows:
+    *   Для Windows (из командной строки типа cmd или PowerShell):
     ```bash
-    ComputerClubPrototype.exe ../../test_file.txt
+    .\bin\task ..\test_file.txt
     ```
+    Или если вы используете Git Bash / MinGW shell в Windows:
+    ```bash
+    ./bin/task.exe ../test_file.txt
+    ```
+
+6.  **Запуск юнит-тестов (опционально):**
+    Исполняемый файл тестов также будет находиться в `build/bin/`.
+    Для запуска тестов, находясь в директории `build`:
+    *   Для Linux/macOS:
+        ```bash
+        ./bin/RunClubTests 
+        ```
+    *   Для Windows (Git Bash / MinGW shell):
+        ```bash
+        ./bin/RunClubTests.exe 
+        ```
+        (или `.\bin\RunClubTests.exe` для Windows cmd/PowerShell)
 
 ## Структура проекта
 
@@ -73,6 +91,8 @@
 *   `computer_club.h`: Заголовочный файл с определениями структур и класса `ComputerClub`.
 *   `computer_club.cpp`: Файл реализации для `ComputerClub`.
 *   `main.cpp`: Основной файл программы, содержит функцию `main`.
+*   `tests/`: Директория с файлами юнит-тестов.
+    *   `test_time.cpp` (и другие `test_*.cpp`): Исходные файлы тестов.
 *   `test_file.txt` : Пример входного файла.
 *   `.gitignore`: Определяет файлы, которые Git должен игнорировать (не является частью проверяемого решения, но полезен для разработки).
 *   `README.md`: Этот файл с инструкциями.
