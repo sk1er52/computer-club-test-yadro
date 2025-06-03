@@ -20,8 +20,8 @@
 
 1.  **Клонировать репозиторий:**
     ```bash
-    git clone <URL_репозитория>
-    cd <имя_директории_проекта>
+    git clone https://github.com/sk1er52/computer-club-test-yadro.git
+    cd computer-club-test-yadro
     ```
 
 2.  **Создать директорию для сборки и перейти в нее:**
